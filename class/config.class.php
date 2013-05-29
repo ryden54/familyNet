@@ -74,8 +74,8 @@ class Config
 	public static function getEnvLevel() {
 		if (self::$envLvl === null) {
 			self::$envLvl = false;
-			//	host.conf can override host
-			$envFile = $_SERVER['DOCUMENT_ROOT'] . '/../config/env.conf.php';
+
+			$envFile = $_SERVER['DOCUMENT_ROOT'] . '/../config/generic/env.conf.php';
 			if (file_exists($envFile) === true) {
 				$env = null;
 				include $envFile;
@@ -84,8 +84,19 @@ class Config
 				} else {
 					die('No environment level specified in ' . $envFile . ' ! ');
 				}
-			} else {
-				die('No environment level file found : ' . $envFile . ' ! ');
+			}
+
+			$envFile = $_SERVER['DOCUMENT_ROOT'] . '/../config/site/env.conf.php';
+			if (file_exists($envFile) === true) {
+				$env = null;
+				include $envFile;
+				if ($env !== null) {
+					self::$envLvl = strtolower(trim($env));
+				}
+			}
+
+			if (self::$envLvl === false) {
+				die('No environment level found in env.conf.php');
 			}
 		}
 		return self::$envLvl;
@@ -99,8 +110,16 @@ class Config
 				self::$host = $_SERVER['SERVER_NAME'];
 			}
 
-			//	host.conf can override host
-			$hostFile = $_SERVER['DOCUMENT_ROOT'] . '/../config/env.conf.php';
+			$hostFile = $_SERVER['DOCUMENT_ROOT'] . '/../config/generic/env.conf.php';
+			if (file_exists($hostFile) === true) {
+				$host = null;
+				include $hostFile;
+				if ($host !== null) {
+					self::$host = $host;
+				}
+			}
+
+			$hostFile = $_SERVER['DOCUMENT_ROOT'] . '/../config/site/env.conf.php';
 			if (file_exists($hostFile) === true) {
 				$host = null;
 				include $hostFile;
