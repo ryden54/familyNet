@@ -4,3 +4,6 @@
 [submodule "www/static/libs/Bootstrap-Image-Gallery"]
 	path = www/static/libs/Bootstrap-Image-Gallery
 	url = https://github.com/blueimp/Bootstrap-Image-Gallery.git
+[submodule "www/static/libs/bootstrap-wysihtml5"]
+	path = www/static/libs/bootstrap-wysihtml5
+	url = https://github.com/jhollingworth/bootstrap-wysihtml5.git
