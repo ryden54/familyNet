@@ -18,6 +18,14 @@ include $_SERVER['DOCUMENT_ROOT'] . '/../includes/start.inc.php';
 ?>
 <div class="block">
 	<h3>Blacklist des adresses</h3>
+	<?php
+$list = $context->getDb()->autorisations_blacklist()->order('lastDate desc');
+if (count($list) === 0) {
+	?>
+	<div class="alert alert-info">Aucune adresse dans la blacklist</div>
+	<?php
+} else {
+	?>
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -30,8 +38,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/../includes/start.inc.php';
 		</thead>
 		<tbody>
 			<?php
-foreach ($context->getDb()->autorisations_blacklist()->order('lastDate desc') As $a) {
-	$delay = $context->isBlackListed($a['ip']);
+	foreach ($list As $a) {
+		$delay = $context->isBlackListed($a['ip']);
 			?>
 			<tr>
 				<td><?=$a['ip']; ?></td>
@@ -41,10 +49,15 @@ foreach ($context->getDb()->autorisations_blacklist()->order('lastDate desc') As
 				<td><a class="btn btn-warning" href="?forgive=<?=urlencode($a['ip']); ?>&token=<?=$_SESSION['NEXT_TOKEN']; ?>">Pardonner</a></td>
 			</tr>
 			<?php
-}
+	}
+
 			?>
 		</tbody>
 	</table>
+	<?php
+
+}
+	?>
 </div>
 <?php
 
