@@ -1,3 +1,6 @@
 [submodule "libs/PHPMailer"]
 	path = libs/PHPMailer
 	url = https://github.com/PHPMailer/PHPMailer.git
+[submodule "www/static/libs/Bootstrap-Image-Gallery"]
+	path = www/static/libs/Bootstrap-Image-Gallery
+	url = https://github.com/blueimp/Bootstrap-Image-Gallery.git
