@@ -13,3 +13,6 @@
 [submodule "libs/NotORM"]
 	path = libs/NotORM
 	url = https://github.com/vrana/notorm.git
+[submodule "www/static/libs/jQuery-File-Upload"]
+	path = www/static/libs/jQuery-File-Upload
+	url = https://github.com/blueimp/jQuery-File-Upload.git
