@@ -1,0 +1,61 @@
+@CHARSET "ISO-8859-1";
+
+.photo-edit {
+	position: relative;
+}
+
+.photo-edit .face {
+	border: 1px solid lightgreen;
+	position: absolute;
+	background: lightgray;
+	opacity: 0.4;
+	filter: alpha(opacity = 40); /* For IE8 and earlier */
+}
+
+.photo-edit .photo {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+	user-select: none;
+}
+
+.photo-edit .photo-infos input,.photo-edit .photo-infos textarea {
+	margin-bottom: 6px;
+	max-width: 100%;
+}
+
+.photo-edit .presences {
+	margin-top: 10px;
+}
+
+.photo-edit .presence .btn img {
+	max-width: 30px;
+	max-height: 30px;
+}
+
+.photo-edit .presences .alert {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.photo-edit .magicbox {
+	height: 30px;
+}
+
+.photo-edit .magicbox .proposition {
+	position: relative;
+}
+
+.photo-edit .magicbox .proposition img {
+	height: 40px;
+	max-width: 40px;
+}
+
+.photo-edit .magicbox .proposition span {
+	position: absolute;
+	left: 45px;
+}
+
+/* .photo-edit .combobox-container input.combobox { */
+/* 	max-width: 75%; */
+/* } */

@@ -1,0 +1,62 @@
+@CHARSET "ISO-8859-1";
+
+.photo-bloc {
+	position: relative;
+	display: inline-block;
+}
+
+.photo-bloc img {
+	max-height: 90%;
+}
+
+.photo-bloc .legend {
+	position: absolute;
+	top: 0px;
+	width: 100%;
+	background: rgba(77, 77, 77, 0.8);
+	color: white;
+	font-size: 14px;
+	display: none;
+	min-height: 30px;
+}
+
+.photo-bloc .legend.bottom {
+	top: auto;
+	bottom: 0px;
+}
+
+.photo-bloc .legend span {
+	float: left;
+	clear: left;
+	padding: 0px 5px;
+}
+
+.photo-bloc .legend span.title {
+	text-align: center;
+	padding: 6px;
+	float: none;
+	display: block;
+}
+
+.photo-bloc .legend span.sender,.photo-bloc .legend span.actions {
+	float: right;
+	clear: right;
+}
+
+.photo-bloc .legend span.place {
+	clear: none;
+	margin-left: 10px;
+}
+
+.photo-bloc .legend span.presences {
+	display: block;
+	font-weight: normal;
+}
+
+.photo-bloc .legend span a {
+	color: white;
+}
+
+.photo-bloc:hover .legend,.photo-bloc .legend.visible {
+	display: block;
+}

@@ -1,0 +1,27 @@
+@CHARSET "ISO-8859-1";
+
+.thumbnails {
+	margin: 0px;
+}
+
+.thumbnails h4 {
+	margin: 0px;
+}
+
+.thumbnails .thumbnail {
+	height: 110px;
+	text-align: center;
+}
+
+.thumbnails .thumbnail img {
+	max-height: 110px;
+}
+
+@media ( max-width : 979px) and (min-width: 768px) {
+	.thumbnails .thumbnail {
+		height: 65px;
+	}
+	.thumbnails .thumbnail img {
+		max-height: 65px;
+	}
+}

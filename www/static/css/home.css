@@ -1,0 +1,31 @@
+@CHARSET "ISO-8859-1";
+
+#homeCarousel .photo-bloc {
+	overflow-y: hidden;
+}
+
+#homeCarousel .photo-bloc {
+	display: block;
+}
+
+#homeCarousel img {
+	width: 100%;
+	max-height: none;
+}
+
+.row-fluid .dayPhotos {
+	margin-left: 0px;
+}
+
+[class*="span"] {
+	float: right;
+}
+
+#homeCarousel .carousel-control {
+	top: 55px;
+}
+
+#homeCarousel {
+	margin: 0px;
+	min-height: 100px; 
+}

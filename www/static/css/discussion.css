@@ -1,0 +1,84 @@
+@CHARSET "ISO-8859-1";
+
+.discussions > .btn {
+	margin: 2px 0px 0px 2px;
+}
+.discussion>h3>input {
+	margin-top: 7px;
+}
+.discussion>h3>.toolbar {
+	float: right;
+}
+
+.discussion>.pagination {
+	clear: right;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.message {
+	position: relative;
+}
+
+.message .meta {
+	display: inline-block;
+	float: left;
+	padding-right: 10px;
+	margin-right: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+}
+
+.message form, form .message .formMessageArea {
+	display: block;
+ 	width: 95%;
+	float: left;
+}
+
+.message .formMessageArea>*:not(.toolbar ) {
+	width: 100%;
+}
+
+.message .formMessageArea textarea {
+	resize: vertical;
+	width: 100%;
+}
+
+.message .toolbar {
+	float: right;
+	display: inline-block;
+	padding-left: 10px;
+	padding-bottom: 10px;
+}
+
+span.label.sticky {
+	background-color: red;
+}
+
+span.label.cat1 {
+	background-color: lightgreen;
+}
+
+span.label.cat2 {
+	background-color: blue;
+}
+
+span.label.cat4 {
+	background-color: #F7D616;
+}
+
+span.label.cat5 {
+	background-color: red;
+}
+
+span.label.cat6 {
+	background-color: purple;
+}
+
+span.label.cat7 {
+	background-color: darkgreen;
+}
+
+span.label.cat8 {
+	background-color: orange;
+}

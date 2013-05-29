@@ -1,0 +1,13 @@
+@CHARSET "ISO-8859-1";
+
+.progress {
+	margin-bottom: 5px;
+}
+
+.fileinput-button {
+	float: none;
+}
+
+.form-actions {
+	text-align: right;
+}

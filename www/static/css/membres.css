@@ -1,0 +1,13 @@
+@CHARSET "ISO-8859-1";
+
+.thumbnails .thumbnail span {
+	display: block;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.dates {
+	font-style: italic;
+	font-size: 11px;
+}
