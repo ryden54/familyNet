@@ -16,7 +16,11 @@ function myTrace($trace) {
 
 		if (isset($caller['args']) === true) {
 			foreach ($caller['args'] As $a) {
-				$args[] = var_export($a, true);
+				if (is_object($a)) {
+					$args[] = get_class($a);
+				} else {
+					$args[] = var_export($a, true);
+				}
 			}
 		}
 		$res .= implode(', ', $args) . ')<br/>';
