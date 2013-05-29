@@ -14,9 +14,10 @@ function __autoload($class_name) {
 
 	if (file_exists($path) === false) {
 		var_dump("Failed to open <b>'" . $class_name . "'</b> class file :" . $path/*, E_USER_WARNING*/);
-	}
-	include_once $path;
-	if (class_exists($class_name, false) === false) {
-		var_dump("Failed to autoload class " . $class_name/*, E_USER_ERROR*/);
+	} else {
+		include_once $path;
+		if (class_exists($class_name, false) === false) {
+			var_dump("Failed to autoload class " . $class_name/*, E_USER_ERROR*/);
+		}
 	}
 }
