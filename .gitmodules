@@ -7,3 +7,6 @@
 [submodule "www/static/libs/bootstrap-wysihtml5"]
 	path = www/static/libs/bootstrap-wysihtml5
 	url = https://github.com/jhollingworth/bootstrap-wysihtml5.git
+[submodule "www/static/libs/nicolasbize-magicsuggest"]
+	path = www/static/libs/nicolasbize-magicsuggest
+	url = https://github.com/nicolasbize/magicsuggest.git
