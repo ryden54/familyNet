@@ -27,7 +27,7 @@ class Db_Sql Extends Pdo
 						'mysql://' . Config::get('HOST', 'SQL') . '@' . Config::get('USER', 'SQL') . '/' . Config::get('DATABASE', 'SQL') . '<br/>'
 								. $this->getAttribute(PDO::ATTR_CONNECTION_STATUS),
 						$statement,
-						$stmt->rowCount());
+						($stmt instanceof PDOStatement ? $stmt->rowCount() : 'error'));
 
 		return $stmt;
 	}
