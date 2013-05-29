@@ -76,7 +76,15 @@ class Context
 										));
 
 				if (is_array($typeAutorisation) === true) {
-					$this->loginUser(false, $typeAutorisation['MotDePasse'], $cookieUser['id']);
+					try {
+						$this->loginUser(false, $typeAutorisation['MotDePasse'], $cookieUser['id']);
+					} catch (User_Exception $e) {
+						//	Nothing to do specifically
+					}
+				}
+
+				if (($this->getUser() instanceof User) === false) {
+					$this->forgetUser();
 				}
 			}
 		}
@@ -96,8 +104,73 @@ class Context
 			$_SESSION['USER'] = serialize($this->user);
 			return $this->user;
 		} catch (Exception $e) {
-			return $e;
+			if ($e->getCode() === User_Exception::PASSWORD) {
+				$this->setBlackList($this->getIp());
+			}
+			throw $e;
 		}
+	}
+
+	protected function setBlackList($ip) {
+		$table = $this->getDb()->autorisations_blacklist()->where(array(
+							'ip' => ($ip)
+						));
+
+		$previousLock = $table->fetch();
+		$tries = 1;
+		if ($previousLock === false) {
+			$this->getDb()->autorisations_blacklist()->insert(array(
+						'ip' => ($ip), 'tries' => $tries, 'lastDate' => Db_Sql::getNowString()
+					));
+		} else {
+			$tries = $previousLock['tries'] + 1;
+			$this->getDb()->autorisations_blacklist()
+					->insert_update(
+							array(
+								'ip' => ($ip)
+							),
+							array(
+								'lastDate' => Db_Sql::getNowString(), 'tries' => $previousLock['tries'] + 1
+							));
+		}
+
+		$lockFile = $this->getLockfilePath($ip);
+		$lockDelay = min(pow(Config::get('LOCK_INTERVAL', 'MANAGEMENT'), $tries), 60 * 60 * 24 * 365 * 10);
+		if (touch($lockFile, time() + $lockDelay) === false) {
+			mvd("Failed to create lock file '" . $lockFile . "' for then next " . $lockDelay . " seconds");
+		}
+	}
+
+	public function unsetBlacklist($ip) {
+		$stmt = $this->getSql()->prepare("Delete FROM autorisations_blacklist WHERE ip = ?");
+		$stmt->execute(array(
+					$ip
+				));
+		$filePath = $this->getLockfilePath($ip);
+		if (file_exists($filePath) === true) {
+			unset($filePath);
+		}
+	}
+
+	public function isBlackListed($ip = null) {
+		if ($ip === null) {
+			$ip = $this->getIp();
+		}
+		if ($ip !== false) {
+			$filePath = $this->getLockfilePath($ip);
+			if (file_exists($filePath) === true) {
+				if (filemtime($filePath) > time()) {
+					return filemtime($filePath) - time();
+				} else {
+					unlink($filePath);
+				}
+			}
+		}
+		return false;
+	}
+
+	protected function getLockfilePath($ip) {
+		return $_SERVER['DOCUMENT_ROOT'] . '/../tmp/lock_' . md5($ip);
 	}
 
 	public function memorizeUser(User $u, $md5Pass) {
@@ -139,6 +212,20 @@ class Context
 			$this->debug = new Debug();
 		}
 		return $this->debug;
+	}
+
+	public function getIp() {
+		$ip = false;
+		//Test if it is a shared client
+		if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+			$ip = $_SERVER['HTTP_CLIENT_IP'];
+			//Is it a proxy address
+		} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+			$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		} else {
+			$ip = $_SERVER['REMOTE_ADDR'];
+		}
+		return $ip;
 	}
 
 	public function addHtmlInline($inline, $priority = 'N') {

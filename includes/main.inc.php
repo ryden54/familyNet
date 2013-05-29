@@ -13,4 +13,6 @@ include_once dirname(__FILE__) . '/main/token.inc.php';
 
 include_once dirname(__FILE__) . '/main/context.inc.php';
 
+include_once dirname(__FILE__) . '/main/blacklist.inc.php';
+
 include_once dirname(__FILE__) . '/main/user.inc.php';

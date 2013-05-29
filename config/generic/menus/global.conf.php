@@ -30,16 +30,19 @@ $config['MENU'] =
 						'Gestion',
 						false,
 						array(
-							// 								array(
-							// 									"Page d'accueil", '/gestion/home.php', false, false
-							// 								),
-							array(
-								'Newsletters', '/gestion/newsletters.php', false, false
-							),
-														false,
-														array(
-															'Mots de passe', '/gestion/passwords.php', false, false
-														),
+								// 								array(
+								// 									"Page d'accueil", '/gestion/home.php', false, false
+								// 								),
+								array(
+									'Newsletters', '/gestion/newsletters.php', false, false
+								),
+								false,
+								array(
+									'Mots de passe', '/gestion/passwords.php', false, false
+								),
+								array(
+									'Blacklist', '/gestion/blacklist.php', false, false
+								),
 						// 								array(
 						// 									"Visiteurs", '/gestion/stats/users.php', false, false
 						// 								),

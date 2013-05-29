@@ -6,17 +6,20 @@ if ($_SESSION['TOKEN'] === Html::getRequestOrPost('token', false, HTML::TEXT)) {
 	if (Html::getPost("login[user]", false) !== false && Html::getPost("login[pass]", false) !== false) {
 
 		$md5Pass = md5(Html::getPost("login[pass]", false, HTML::ANY));
-		$login = $context->loginUser(Html::getPost("login[user]", false), $md5Pass);
-		if ($login instanceof User) {
+		try {
+			$login = $context->loginUser(Html::getPost("login[user]", false), $md5Pass);
+			if ($login instanceof User) {
 
-			if (Html::getPost('login[remember]', false, HTml::BOOLEAN) === true) {
-				$context->memorizeUser($login, $md5Pass);
+				if (Html::getPost('login[remember]', false, HTml::BOOLEAN) === true) {
+					$context->memorizeUser($login, $md5Pass);
+				}
+
+				header('Location: ' . Html::getPost('org', '/', Html::TEXT) . '#connected');
+				exit;
 			}
-
-			header('Location: ' . Html::getPost('org', '/', Html::TEXT) . '#connected');
-			exit;
-		} elseif ($login instanceof Exception) {
-			$errorMsg = $login->getMessage();
+		} catch (Exception $e) {
+			$errorMsg = "Echec de l'identification";
+			include_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/main/blacklist.inc.php';
 		}
 	}
 }

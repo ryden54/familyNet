@@ -34,16 +34,15 @@ class User
 				if (is_object($lastLog) == true) {
 					$this->lastVisitDate = $lastLog['LastDateTimeLog'];
 				}
+
 				$this->logLogin();
 
-				return;
 			} else {
-				throw new Exception("Aucune identité correspondante");
+				throw new User_Exception("Aucune identité correspondante", User_Exception::IDENTITY);
 			}
 		} else {
-			throw new Exception("Aucune autorisation correspondante");
+			throw new User_Exception("Aucune autorisation correspondante", User_Exception::PASSWORD);
 		}
-		throw new Exception("Echec de l'identification");
 	}
 
 	public function __sleep() {

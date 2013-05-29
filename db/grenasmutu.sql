@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: 127.0.0.1
--- Généré le: Jeu 23 Mai 2013 à 13:19
+-- Généré le: Jeu 30 Mai 2013 à 00:08
 -- Version du serveur: 5.5.25a-log
 -- Version de PHP: 5.4.4
 
@@ -32,6 +32,7 @@ SET time_zone = "+00:00";
 -- Dernière modification: Jeu 23 Mai 2013 à 10:20
 --
 
+DROP TABLE IF EXISTS `accueil_paragraphes`;
 CREATE TABLE IF NOT EXISTS `accueil_paragraphes` (
   `IdParagraphe` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `Texte` longtext NOT NULL,
@@ -46,9 +47,10 @@ CREATE TABLE IF NOT EXISTS `accueil_paragraphes` (
 -- Structure de la table `autorisations`
 --
 -- Création: Jeu 23 Mai 2013 à 10:20
--- Dernière modification: Jeu 23 Mai 2013 à 10:20
+-- Dernière modification: Lun 27 Mai 2013 à 21:19
 --
 
+DROP TABLE IF EXISTS `autorisations`;
 CREATE TABLE IF NOT EXISTS `autorisations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `label` varchar(60) NOT NULL DEFAULT '',
@@ -60,18 +62,19 @@ CREATE TABLE IF NOT EXISTS `autorisations` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `autorisations_personnes`
+-- Structure de la table `autorisations_blacklist`
 --
--- Création: Jeu 23 Mai 2013 à 10:20
--- Dernière modification: Jeu 23 Mai 2013 à 10:48
+-- Création: Mar 28 Mai 2013 à 20:30
 --
 
-CREATE TABLE IF NOT EXISTS `autorisations_personnes` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `personnes_id` bigint(20) unsigned DEFAULT NULL,
-  `autorisations_id` bigint(20) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1935 ;
+DROP TABLE IF EXISTS `autorisations_blacklist`;
+CREATE TABLE IF NOT EXISTS `autorisations_blacklist` (
+  `ip` varchar(128) NOT NULL,
+  `lastDate` datetime NOT NULL,
+  `tries` int(11) NOT NULL DEFAULT '0',
+  UNIQUE KEY `ip` (`ip`),
+  KEY `time` (`lastDate`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -82,6 +85,7 @@ CREATE TABLE IF NOT EXISTS `autorisations_personnes` (
 -- Dernière modification: Jeu 23 Mai 2013 à 10:48
 --
 
+DROP TABLE IF EXISTS `coordonnees`;
 CREATE TABLE IF NOT EXISTS `coordonnees` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `Adresse` varchar(255) DEFAULT NULL,
@@ -99,10 +103,11 @@ CREATE TABLE IF NOT EXISTS `coordonnees` (
 -- Structure de la table `discussions`
 --
 -- Création: Jeu 23 Mai 2013 à 10:20
--- Dernière modification: Jeu 23 Mai 2013 à 10:48
+-- Dernière modification: Mer 29 Mai 2013 à 19:35
 -- Dernière vérification: Jeu 23 Mai 2013 à 10:20
 --
 
+DROP TABLE IF EXISTS `discussions`;
 CREATE TABLE IF NOT EXISTS `discussions` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `discussions_categories_id` bigint(20) unsigned NOT NULL DEFAULT '0',
@@ -131,6 +136,7 @@ CREATE TABLE IF NOT EXISTS `discussions` (
 -- Dernière modification: Jeu 23 Mai 2013 à 10:20
 --
 
+DROP TABLE IF EXISTS `discussions_categories`;
 CREATE TABLE IF NOT EXISTS `discussions_categories` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `categorie` varchar(127) NOT NULL DEFAULT '',
@@ -146,6 +152,7 @@ CREATE TABLE IF NOT EXISTS `discussions_categories` (
 -- Dernière modification: Jeu 23 Mai 2013 à 10:48
 --
 
+DROP TABLE IF EXISTS `discussions_messages`;
 CREATE TABLE IF NOT EXISTS `discussions_messages` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `discussions_id` bigint(20) unsigned NOT NULL DEFAULT '0',
@@ -162,11 +169,11 @@ CREATE TABLE IF NOT EXISTS `discussions_messages` (
 --
 -- Structure de la table `newsletters`
 --
--- Création: Jeu 23 Mai 2013 à 11:17
--- Dernière modification: Jeu 23 Mai 2013 à 11:17
--- Dernière vérification: Jeu 23 Mai 2013 à 11:17
+-- Création: Lun 27 Mai 2013 à 20:26
+-- Dernière modification: Lun 27 Mai 2013 à 20:26
 --
 
+DROP TABLE IF EXISTS `newsletters`;
 CREATE TABLE IF NOT EXISTS `newsletters` (
   `id` bigint(11) unsigned NOT NULL AUTO_INCREMENT,
   `personnes_id` bigint(11) unsigned NOT NULL DEFAULT '0',
@@ -178,17 +185,19 @@ CREATE TABLE IF NOT EXISTS `newsletters` (
   PRIMARY KEY (`id`),
   KEY `time` (`sentDate`),
   KEY `personnes` (`personnes_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=108 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=6 ;
 
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `newsletters_images`
 --
--- Création: Jeu 23 Mai 2013 à 10:20
--- Dernière modification: Jeu 23 Mai 2013 à 10:49
+-- Création: Lun 27 Mai 2013 à 20:26
+-- Dernière modification: Lun 27 Mai 2013 à 20:26
+-- Dernière vérification: Lun 27 Mai 2013 à 20:26
 --
 
+DROP TABLE IF EXISTS `newsletters_images`;
 CREATE TABLE IF NOT EXISTS `newsletters_images` (
   `hash` varchar(255) NOT NULL,
   `photos_id` bigint(20) NOT NULL,
@@ -205,6 +214,7 @@ CREATE TABLE IF NOT EXISTS `newsletters_images` (
 -- Dernière modification: Jeu 23 Mai 2013 à 10:48
 --
 
+DROP TABLE IF EXISTS `personnes`;
 CREATE TABLE IF NOT EXISTS `personnes` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `IdParent1` bigint(20) unsigned DEFAULT NULL,
@@ -233,6 +243,7 @@ CREATE TABLE IF NOT EXISTS `personnes` (
 -- Dernière vérification: Jeu 23 Mai 2013 à 10:20
 --
 
+DROP TABLE IF EXISTS `personnes_coordonnees`;
 CREATE TABLE IF NOT EXISTS `personnes_coordonnees` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `personnes_id` bigint(20) unsigned NOT NULL DEFAULT '0',
@@ -250,6 +261,7 @@ CREATE TABLE IF NOT EXISTS `personnes_coordonnees` (
 -- Dernière modification: Jeu 23 Mai 2013 à 10:48
 --
 
+DROP TABLE IF EXISTS `personnes_liens_couple`;
 CREATE TABLE IF NOT EXISTS `personnes_liens_couple` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `IdPersonne1` bigint(20) unsigned NOT NULL DEFAULT '0',
@@ -266,10 +278,11 @@ CREATE TABLE IF NOT EXISTS `personnes_liens_couple` (
 -- Structure de la table `photos`
 --
 -- Création: Jeu 23 Mai 2013 à 10:20
--- Dernière modification: Jeu 23 Mai 2013 à 10:48
+-- Dernière modification: Lun 27 Mai 2013 à 21:59
 -- Dernière vérification: Jeu 23 Mai 2013 à 10:20
 --
 
+DROP TABLE IF EXISTS `photos`;
 CREATE TABLE IF NOT EXISTS `photos` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `DateCliche` date NOT NULL DEFAULT '0000-00-00',
@@ -280,7 +293,7 @@ CREATE TABLE IF NOT EXISTS `photos` (
   `DateUpload` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `IdPhoto_2` (`id`,`DateCliche`,`DateUpload`,`personnes_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=2110 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=2113 ;
 
 -- --------------------------------------------------------
 
@@ -291,6 +304,7 @@ CREATE TABLE IF NOT EXISTS `photos` (
 -- Dernière modification: Jeu 23 Mai 2013 à 10:48
 --
 
+DROP TABLE IF EXISTS `photos_du_jour`;
 CREATE TABLE IF NOT EXISTS `photos_du_jour` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `Jour` date NOT NULL DEFAULT '0000-00-00',
@@ -309,6 +323,7 @@ CREATE TABLE IF NOT EXISTS `photos_du_jour` (
 -- Dernière vérification: Jeu 23 Mai 2013 à 10:20
 --
 
+DROP TABLE IF EXISTS `photos_presences`;
 CREATE TABLE IF NOT EXISTS `photos_presences` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `photos_id` bigint(20) unsigned NOT NULL DEFAULT '0',
@@ -324,10 +339,11 @@ CREATE TABLE IF NOT EXISTS `photos_presences` (
 -- Structure de la table `stats_logs`
 --
 -- Création: Jeu 23 Mai 2013 à 10:20
--- Dernière modification: Jeu 23 Mai 2013 à 10:48
+-- Dernière modification: Mer 29 Mai 2013 à 21:32
 -- Dernière vérification: Jeu 23 Mai 2013 à 10:20
 --
 
+DROP TABLE IF EXISTS `stats_logs`;
 CREATE TABLE IF NOT EXISTS `stats_logs` (
   `id` bigint(30) NOT NULL AUTO_INCREMENT,
   `personnes_id` bigint(20) unsigned NOT NULL DEFAULT '0',
@@ -343,7 +359,7 @@ CREATE TABLE IF NOT EXISTS `stats_logs` (
   `Resolution` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `qui` (`personnes_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35192 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35200 ;
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 

@@ -18,6 +18,8 @@ function myTrace($trace) {
 			foreach ($caller['args'] As $a) {
 				if (is_object($a)) {
 					$args[] = get_class($a);
+				} elseif (is_array($a)) {
+					$args[] = 'Array[]';
 				} else {
 					$args[] = var_export($a, true);
 				}
@@ -28,7 +30,7 @@ function myTrace($trace) {
 	return $res;
 }
 
-function displayError($errorType, $errorText, $errorDetail = null) {
+function displayError($errorType, $errorText, $errorDetail = null, $fatal = false) {
 	if (Config::get('DEBUG') === TRUE) {
 
 		if ($errorDetail === null) {
@@ -42,6 +44,9 @@ function displayError($errorType, $errorText, $errorDetail = null) {
 		echo $errorDetail . '<br/>';
 
 		echo '</div>';
+	}
+	if ($fatal === true) {
+		exit;
 	}
 }
 
