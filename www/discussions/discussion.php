@@ -120,9 +120,9 @@ if ($_SESSION['TOKEN'] === Html::getRequestOrPost('token', false, HTML::TEXT)) {
 
 function showForm($d, $m = null) {
 
-	Context::getInstance()->addCssFile('/static/libs/bootstrap-wysihtml5/bootstrap-wysihtml5-0.0.2.css', 'F');
-	Context::getInstance()->addJsFile('/static/libs/bootstrap-wysihtml5/libs/js/wysihtml5-0.3.0_rc2.min.js', 'G');
-	Context::getInstance()->addJsFile('/static/libs/bootstrap-wysihtml5/bootstrap-wysihtml5-0.0.2.js', 'G');
+	Context::getInstance()->addCssFile('/static/libs/bootstrap-wysihtml5/dist/bootstrap-wysihtml5-0.0.2.css', 'F');
+	Context::getInstance()->addJsFile('/static/libs/bootstrap-wysihtml5/lib/js/wysihtml5-0.3.0.min.js', 'G');
+	Context::getInstance()->addJsFile('/static/libs/bootstrap-wysihtml5/dist/bootstrap-wysihtml5-0.0.2.min.js', 'G');
 
 ?>
 <form method="post" class="clearfix" action="/discussions/discussion.php?id=<?=$d['id']; ?>">
