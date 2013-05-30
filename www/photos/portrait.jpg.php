@@ -9,8 +9,8 @@ $format = Html::getRequest('f', false, Html::TEXT);
 $personnes_id = Html::getRequest('personnes_id', false, Html::INTEGER);
 
 if ($personnes_id !== false) {
-	if (isset($_SESSION['portraits']) === false || isset($_SESSION['portraits'][$personnes_id]) === false) {
-		if (isset($_SESSION['portraits']) === false) {
+	if (true || isset($_SESSION['portraits']) === false || isset($_SESSION['portraits'][$personnes_id]) === false) {
+		if (true || isset($_SESSION['portraits']) === false) {
 			$_SESSION['portraits'] = array(
 						-1
 					);
@@ -24,30 +24,25 @@ if ($personnes_id !== false) {
 			if ($p['id'] !== null) {
 				$_SESSION['portraits'][$p['personnes_id']] = $p['id'];
 			} else {
-				$_SESSION['portraits'][$p['personnes_id']] = '0.' . strtolower($p['Sexe']);
+				$_SESSION['portraits'][$p['personnes_id']] = 'portrait.' . strtolower($p['Sexe']);
 			}
 		}
-
 	}
-
 	$id = $_SESSION['portraits'][$personnes_id];
 }
 
 if ($id !== false) {
-	$imgPath = (strpos($id, '0.') === 0 ? '/static/i/' : Config::get('PORTRAITS_PATH', 'PHOTOS')) . $id . ($format === 'mini' ? '-mini' : '') . '.jpg';
-
-	header('Content-type: image/jpeg');
-
+	if (strpos($id, 'portrait.') === 0) {
+		$imgPath = $_SERVER['DOCUMENT_ROOT'] . '/static/i/' . $id . '.png';
+		header('Content-type: image/png');
+	} else {
+		$imgPath = Config::get('PORTRAITS_PATH', 'PHOTOS') . $id . ($format === 'mini' ? '-mini' : '') . '.jpg';
+		header('Content-type: image/jpeg');
+	}
 	if (file_exists($imgPath)) {
-		// 				header_remove();
-		// 		mvd(headers_list());
-		// 		die();
-		// 		header("Cache-Control: no-store, cache, must-revalidate, post-check=0, pre-check=0");
-		// 		header("Expires: ");
-		// 		header("Pragma: ");
 		echo file_get_contents($imgPath, false);
 	} else {
-		echo file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/static/i/0.m.jpg', false);
+		echo file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/static/i/portrait.m.png', false);
 	}
 	exit();
 }
