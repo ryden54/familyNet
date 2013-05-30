@@ -9,8 +9,8 @@ $format = Html::getRequest('f', false, Html::TEXT);
 $personnes_id = Html::getRequest('personnes_id', false, Html::INTEGER);
 
 if ($personnes_id !== false) {
-	if (true || isset($_SESSION['portraits']) === false || isset($_SESSION['portraits'][$personnes_id]) === false) {
-		if (true || isset($_SESSION['portraits']) === false) {
+	if (isset($_SESSION['portraits']) === false || isset($_SESSION['portraits'][$personnes_id]) === false) {
+		if (isset($_SESSION['portraits']) === false) {
 			$_SESSION['portraits'] = array(
 						-1
 					);
