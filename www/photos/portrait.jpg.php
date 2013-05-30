@@ -34,7 +34,7 @@ if ($personnes_id !== false) {
 }
 
 if ($id !== false) {
-	$imgPath = Config::get('PORTRAITS_PATH', 'PHOTOS') . $id . ($format === 'mini' ? '-mini' : '') . '.jpg';
+	$imgPath = (strpos($id, '0.') === 0 ? '/static/i/' : Config::get('PORTRAITS_PATH', 'PHOTOS')) . $id . ($format === 'mini' ? '-mini' : '') . '.jpg';
 
 	header('Content-type: image/jpeg');
 
@@ -47,7 +47,7 @@ if ($id !== false) {
 		// 		header("Pragma: ");
 		echo file_get_contents($imgPath, false);
 	} else {
-		echo file_get_contents(Config::get('PORTRAITS_PATH', 'PHOTOS') . '0.m.jpg', false);
+		echo file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/static/i/0.m.jpg', false);
 	}
 	exit();
 }
