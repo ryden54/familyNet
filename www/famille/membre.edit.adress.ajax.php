@@ -2,7 +2,6 @@
 $_NO_TOKEN = true;
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/main.inc.php';
 $context->setHasNavBar(false);
-$context->addCssFile('/static/css/membre.css');
 
 $id = Html::getRequest('personnes_id', false, HTML::INTEGER);
 

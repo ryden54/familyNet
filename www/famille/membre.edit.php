@@ -1,8 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/main.inc.php';
 
-// $context->addCssFile('/static/css/membre.css');
-
 $id = Html::getRequestOrPost('id', false, HTML::INTEGER);
 $membre = $context->getDb()->personnes[$id];
 

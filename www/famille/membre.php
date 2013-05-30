@@ -3,8 +3,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/main.inc.php';
 
 include $_SERVER['DOCUMENT_ROOT'] . '/../includes/start.inc.php';
 
-//$context->addCssFile('/static/css/membre.css');
-
 $id = Html::getRequest('id', false, HTML::INTEGER);
 
 $membre = $context->getDb()->personnes[$id];
