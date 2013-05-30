@@ -193,8 +193,9 @@ class Context
 		if ($this->sql === null) {
 			$this->sql =
 					new Db_Sql('mysql:host=' . Config::get('HOST', 'SQL') . ';dbname=' . Config::get('DATABASE', 'SQL'), Config::get('USER', 'SQL'),
-							Config::get('PASS', 'SQL'), array(
-								PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
+							Config::get('PASS', 'SQL'),
+							array(
+								PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'', PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
 							));
 		}
 		return $this->sql;
