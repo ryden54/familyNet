@@ -10,7 +10,7 @@ if ($_SESSION['TOKEN'] === Html::getRequestOrPost('token', false, HTML::TEXT)) {
 			$login = $context->loginUser(Html::getPost("login[user]", false), $md5Pass);
 			if ($login instanceof User) {
 
-				if (Html::getPost('login[remember]', false, HTml::BOOLEAN) === true) {
+				if (Html::getPost('login[remember]', false, Html::BOOLEAN) === true) {
 					$context->memorizeUser($login, $md5Pass);
 				}
 
