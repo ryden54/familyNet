@@ -54,6 +54,7 @@
 .photo-edit .magicbox .proposition span {
 	position: absolute;
 	left: 45px;
+	line-height: 19px;
 }
 
 /* .photo-edit .combobox-container input.combobox { */

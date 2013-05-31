@@ -1,9 +1,7 @@
 <?php
 if ($id !== false) {
 	$context
-			->addJsInline(
-					'window.photos[' . $id
-							. '] = {presences:{available: [], present: [], searching:null, drawing: null, selection: null}};');
+			->addJsInline('window.photos[' . $id . '] = {presences:{available: [], present: [], searching:null, drawing: null, selection: null}};');
 
 	if ($_SESSION['TOKEN'] === Html::getRequestOrPost('token', false, HTML::TEXT)) {
 		$photosEdit = Html::getPost('photos', false, Html::ANY);
@@ -57,22 +55,21 @@ if ($id !== false) {
 
 		$available = array();
 		foreach ($context->getDb()->personnes() As $personne) {
-			$available[] = array(
-						'id' => $personne['id'], 'name' => ($personne['Prenom'] . ' ' . $personne['Nom'])
+			$available[] =
+					array(
+						'id' => $personne['id'], 'name' => ($personne['Prenom'] . ' ' . $personne['Nom']), 'date' => Db_Sql::formatSqlDate($personne['DateNaissance'], "%Y"),
 					);
 		}
 
 		$context
 				->addJsInline(
 						"window.photos[" . $id . "].presences.available = JSON.parse('"
-								. json_encode($available, JSON_HEX_QUOT | JSON_HEX_APOS | JSON_NUMERIC_CHECK | JSON_UNESCAPED_UNICODE)
-								. "');
+								. json_encode($available, JSON_HEX_QUOT | JSON_HEX_APOS | JSON_NUMERIC_CHECK | JSON_UNESCAPED_UNICODE) . "');
 ");
 		$context
 				->addJsInline(
 						"
-		            window.photos[" . $id . "].presences.box =  $('#photo-edit-" . $id
-								. "-newpres').magicSuggest({
+		            window.photos[" . $id . "].presences.box =  $('#photo-edit-" . $id . "-newpres').magicSuggest({
 		                data: window.photos[" . $id
 								. "].presences.available,
 						allowFreeEntries: false,
@@ -88,9 +85,7 @@ if ($id !== false) {
 						highlight: false,
 						maxSelection: 1,
 						renderer: function(pos){
-                    return '<div class=\"proposition\"><img src=\"/photos/portrait.jpg.php?personnes_id='+ pos.id +'\" alt=\"\" /><span>' +
-                            pos.name
-                           '</span></div>';
+                    return '<div class=\"proposition\"><img src=\"/photos/portrait.jpg.php?personnes_id='+ pos.id +'\" alt=\"' + pos.name + '\" /><span>' + pos.name + '<br/><i>' + pos.date + '</i></span></div>';
                 },
 		                maxDropHeight: 200
 		            });");
