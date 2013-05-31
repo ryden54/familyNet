@@ -57,6 +57,9 @@ if ($_SESSION['TOKEN'] === Html::getRequestOrPost('token', false, HTML::TEXT)) {
 						$membre['IdParent2'] = $linkedMembre['id'];
 					}
 					$membre->update();
+				} elseif(in_array($link, array('IdParent1', 'IdParent2'))===true) {
+					$linkedMembre[$link] = $membre['id'];
+					$linkedMembre->update();
 				}
 			}
 
