@@ -2,7 +2,7 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/main.inc.php';
 
 if (isset($_SESSION['PHOTOS_UPLOAD_TMP_PATH']) === false) {
-	$_SESSION['PHOTOS_UPLOAD_TMP_PATH'] = Config::get('TMP_PATH') . 'photos-upload-' . uniqid() . '/';
+	$_SESSION['PHOTOS_UPLOAD_TMP_PATH'] = Config::get('TMP_PATH') . 'photos-upload-' . Context::getInstance()->getUser()->getId() . '/';
 }
 
 // $Toolkit_Dir = $_SERVER['DOCUMENT_ROOT'] . '/../libs/PHP_JPEG_Metadata_Toolkit_1.12/';
