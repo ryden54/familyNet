@@ -12,7 +12,7 @@ if ($photoDuJour === false) {
 					->fetchOne(
 							'Select photos.id From photos Left Outer Join photos_du_jour On(photos.id = photos_du_jour.photos_id) Where photos_du_jour.id Is Null Order By Rand() Limit 0, 1');
 
-	if ($newPdj !== false) {
+	if ($newPdj === false) {
 		$newPdj =
 				$context->getSql()
 						->fetchOne(
