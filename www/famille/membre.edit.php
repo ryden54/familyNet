@@ -302,7 +302,7 @@ if ($membre === null && $id !== 0) {
 						<option value="F" <?=($membre['Sexe'] === 'F' ? ' selected="selected"' : ''); ?>>Femme</option>
 					</select>
 					<br />Date de naissance
-					<input type="date" name="membre[DateNaissance]" value="<?=$membre['DateNaissance']; ?>" required="required" />
+					<input type="date" name="membre[DateNaissance]" value="<?=$membre['DateNaissance']; ?>" />
 					<br />Date de décès
 					<input type="date" name="membre[DateMort]" value="<?=$membre['DateMort']; ?>" />
 					<br />Hors famille
