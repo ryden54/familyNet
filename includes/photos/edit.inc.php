@@ -1,7 +1,6 @@
 <?php
 if ($id !== false) {
-	$context
-			->addJsInline('window.photos[' . $id . '] = {presences:{available: [], present: [], searching:null, drawing: null, selection: null}};');
+	$context->addJsInline('window.photos[' . $id . '] = {presences:{available: [], present: [], searching:null, drawing: null, selection: null}};');
 
 	if ($_SESSION['TOKEN'] === Html::getRequestOrPost('token', false, HTML::TEXT)) {
 		$photosEdit = Html::getPost('photos', false, Html::ANY);
@@ -28,12 +27,14 @@ if ($id !== false) {
 
 	$p = $context->getDb()->photos[$id];
 	if ($p !== null) {
+
+		$context->addJsInline("window.disableDraggingFor(document.getElementById('photo-preview-" . $id . "'));");
 		$context->addJsInline('window.editedPhoto.push(' . $id . ');');
 
 ?>
 <div class="row-fluid clearfix photo-edit" id="photo-edit-<?=$id; ?>">
 	<div class="span6 photo" id="photo-<?=$id; ?>">
-		<img src="/photos/photo.jpg.php?id=<?=$id; ?>" alt="" class="img-polaroid" />
+		<img src="/photos/photo.jpg.php?id=<?=$id; ?>" alt="" class="img-polaroid" id="photo-preview-<?=$id; ?>" />
 	</div>
 	<div class="span3">
 		<h5>Présences</h5>
@@ -57,7 +58,9 @@ if ($id !== false) {
 		foreach ($context->getDb()->personnes() As $personne) {
 			$available[] =
 					array(
-						'id' => $personne['id'], 'name' => ($personne['Prenom'] . ' ' . $personne['Nom']), 'date' => Db_Sql::formatSqlDate($personne['DateNaissance'], "%Y"),
+							'id' => $personne['id'],
+							'name' => ($personne['Prenom'] . ' ' . $personne['Nom']),
+							'date' => Db_Sql::formatSqlDate($personne['DateNaissance'], "%Y"),
 					);
 		}
 

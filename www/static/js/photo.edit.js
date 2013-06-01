@@ -4,6 +4,17 @@ function getOriginalWidthOfImg(img_element) {
 	return t.width();
 }
 
+window.disableDraggingFor = function(element) {
+	// this works for FireFox and WebKit in future according to
+	// http://help.dottoro.com/lhqsqbtn.php
+	element.draggable = false;
+	// this works for older web layout engines
+	element.onmousedown = function(event) {
+		event.preventDefault();
+		return false;
+	};
+}
+
 function detectFaces(photos_id) {
 	var /* area = $('#photo_' + photos_id + '_form .presences'), */photo = $('img#photo_'
 			+ photos_id);
