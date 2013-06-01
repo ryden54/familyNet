@@ -81,8 +81,6 @@ class Config
 				include $envFile;
 				if ($env !== null) {
 					self::$envLvl = strtolower(trim($env));
-				} else {
-					die('No environment level specified in ' . $envFile . ' ! ');
 				}
 			}
 
