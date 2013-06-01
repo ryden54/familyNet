@@ -38,7 +38,9 @@ if ($_SESSION['TOKEN'] === Html::getRequestOrPost('token', false, HTML::TEXT)) {
 				$membre[$key] = $val;
 			}
 		}
+		$newMembre = false;
 		if ($id === 0) {
+			$newMembre = true;
 			$membre = $context->getDb()->personnes()->insert($membre);
 			$id = $membre['id'];
 
@@ -74,8 +76,7 @@ if ($_SESSION['TOKEN'] === Html::getRequestOrPost('token', false, HTML::TEXT)) {
 				$c->update();
 			}
 		}
-
-		header('Location: /famille/membre.php?id=' . $membre['id']);
+		header('Location: /famille/membre'.($newMembre === true?'.edit':'').'.php?id=' . $membre['id']);
 		exit();
 	}
 
