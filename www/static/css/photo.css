@@ -3,6 +3,7 @@
 .photo-bloc {
 	position: relative;
 	display: inline-block;
+	max-width: 100%;
 }
 
 .photo-bloc img {
