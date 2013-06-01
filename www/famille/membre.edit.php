@@ -256,7 +256,7 @@ if ($membre === null && $id !== 0) {
 				<fieldset>
 					<h5>Rattacher à une autre adresse</h5>
 					<div class="input-append">
-						<input type="text" placeholder="Code postal" size="7" maxlength="7" id="newCoordsZip" class="input-small" />
+						<input type="text" placeholder="Code postal" size="7" maxlength="15" id="newCoordsZip" class="input-small" />
 						<button class="btn" type="button" onClick="javascript:addAdress('<?=$_SESSION['NEXT_TOKEN']; ?>', '<?=$membre['id']; ?>');">
 							<i class="icon-search"></i>
 						</button>
