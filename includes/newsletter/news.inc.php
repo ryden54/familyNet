@@ -118,7 +118,7 @@ if (sizeof($lastPhotos) > 0) {
 }
 
 //	Derniers messages
-$lastMessages = $context->getDb()->discussions_messages()->where('DateMessage >= "' . $date . '"')->order("sticky desc, DateMessage desc");
+$lastMessages = $context->getDb()->discussions_messages()->where('DateMessage >= "' . $date . '"')->order("discussions.sticky desc, DateMessage desc");
 $last = array();
 foreach ($lastMessages As $m) {
 	if (isset($last[$m['discussions_id']]) === false) {
