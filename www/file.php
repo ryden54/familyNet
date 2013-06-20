@@ -12,6 +12,7 @@ if ($name !== false) {
 		header("Content-Length: " . (string) (filesize($realPath)));
 		if (strpos($name, '.jpg') === false) {
 			header('Content-Disposition: attachment; filename="' . $name . '"');
+			header('Content-type: application/octet-stream');
 		} else {
 			header('Content-type: image/jpeg');
 		}
