@@ -294,7 +294,7 @@ if ($discussion === null) {
 						<br /> <a href="/famille/membre.php?id=<?=$m['personnes_id']; ?>"> <?php
 		if ($editing === false) {
 																						   ?>
-							<img class="img-polaroid portrait" src="/photos/portrait.jpg.php?personnes_id=<?=$m['personnes_id']; ?>" width='100px'
+							<img class="img-polaroid portrait" src="/photos/portrait.jpg.php?personnes_id=<?=$m['personnes_id']; ?>" style="width:100px;"
 							alt="Portrait <?=$m->personnes['Prenom'] . ' ' . $m->personnes['Nom']; ?>" /><br /> <?php
 		}
 																												?> <span>
