@@ -42,7 +42,6 @@ function displayError($errorType, $errorText, $errorDetail = null, $fatal = fals
 
 		echo "<div class='alert alert-error'><i class='icon-bell'></i> <b>" . $errorType . " :</b> " . $errorText . '<br/><br/>';
 		echo $errorDetail . '<br/>';
-
 		echo '</div>';
 	}
 	if ($fatal === true) {
@@ -75,8 +74,6 @@ function myErrorHandler($errno, $errstr, $errfile, $errline) {
 		$detail = "Using PHP " . PHP_VERSION . " (" . PHP_OS . ")<br />";
 		$detail .= '<br/>' . myTrace(debug_backtrace()) . '<br/>';
 
-		$detail .= '</div>';
-
 		displayError(
 				(isset($errorTypes[$errno]) === true ? $errorTypes[$errno] : 'Unknown Error [' . $errno . ']'),
 				$errstr . ' in '
@@ -103,13 +100,7 @@ $old_error_handler = set_error_handler("myErrorHandler", E_ALL);
 
 function myExceptionHandler(Exception $exception) {
 	if (Config::get('DEBUG') === TRUE) {
-		echo '<link href="/static/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">';
-		echo "<div class='alert alert-error'><i class='icon-bell'></i> <b>Uncaught Exception </b> " . get_class($exception) . '<br/>';
-
-		echo '<b>' . $exception->getMessage() . '</b><br/>';
-
-		echo '<br/>' . myTrace($exception->getTrace()) . '<br/>';
-		echo "</div>";
+		displayError('Uncaught Exception', get_class($exception), $exception->getMessage().'<br/><br/>'.myTrace($exception->getTrace()));
 	}
 	return null;
 }
