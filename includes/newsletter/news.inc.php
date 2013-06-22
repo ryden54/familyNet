@@ -145,7 +145,7 @@ if (sizeof($last) > 0) {
 	foreach ($last As $d) {
 			?>
 			<li><a href="http://<?=Config::getHost(); ?>/discussions/discussion.php?id=<?=$d['discussion']['id']; ?>"> <?php
-		if ($d['sticky'] == 1) {
+		if ($d['discussion']['sticky'] == 1) {
 			echo '<span style="background-color:#b94a48;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;display: inline-block;padding: 2px 4px;font-size: 11.844px;font-weight: bold;line-height: 14px;color: #ffffff;vertical-align: baseline;white-space: nowrap;text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);">Important</span> ';
 		}
 		echo ucfirst((strlen($d['discussion']['Sujet']) > 0 ? stripslashes($d['discussion']['Sujet']) : '[Pas de sujet]'));
