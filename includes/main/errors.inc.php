@@ -1,17 +1,19 @@
 <?php
+function filePathFilter($f) {
+	return str_replace(array(
+		"\\", substr($_SERVER['DOCUMENT_ROOT'], 0, strrpos($_SERVER['DOCUMENT_ROOT'], '/'))
+	), array(
+		'/', ''
+	), $f);
+}
+
 function myTrace($trace) {
 	$res = '';
 	foreach ($trace As $caller) {
 		$res .=
-				(isset($caller['file']) === true ? str_replace(
-						array(
-							"\\", substr($_SERVER['DOCUMENT_ROOT'], 0, strrpos($_SERVER['DOCUMENT_ROOT'], '/'))
-						),
-						array(
-							'/', ''
-						),
-						$caller['file']) : 'unknown') . ' at line ' . (isset($caller['line']) ? $caller['line'] : '?') . ' : <b>'
-						. (isset($caller['class']) === true ? $caller['class'] . '::' : '') . $caller['function'] . '</b>(';
+				(isset($caller['file']) === true ? filePathFilter($caller['file']) : 'unknown') . ' at line '
+						. (isset($caller['line']) ? $caller['line'] : '?') . ' : <b>' . (isset($caller['class']) === true ? $caller['class'] . '::' : '')
+						. $caller['function'] . '</b>(';
 		$args = array();
 
 		if (isset($caller['args']) === true) {
@@ -76,15 +78,7 @@ function myErrorHandler($errno, $errstr, $errfile, $errline) {
 
 		displayError(
 				(isset($errorTypes[$errno]) === true ? $errorTypes[$errno] : 'Unknown Error [' . $errno . ']'),
-				$errstr . ' in '
-						. str_replace(
-								array(
-									"\\", substr($_SERVER['DOCUMENT_ROOT'], 0, strrpos($_SERVER['DOCUMENT_ROOT'], '/'))
-								),
-								array(
-									'/', ''
-								),
-								$errfile) . ' at line ' . $errline,
+				$errstr . ' in ' . filePathFilter($errfile) . ' at line ' . $errline,
 				$detail);
 
 		if ($errno & (E_ERROR)) {
@@ -100,7 +94,10 @@ $old_error_handler = set_error_handler("myErrorHandler", E_ALL);
 
 function myExceptionHandler(Exception $exception) {
 	if (Config::get('DEBUG') === TRUE) {
-		displayError('Uncaught Exception', get_class($exception), $exception->getMessage().'<br/><br/>'.myTrace($exception->getTrace()));
+		displayError(
+				'Uncaught Exception',
+				get_class($exception) . ' in ' . filePathFilter($exception->getFile()) . ' on line ' . $exception->getLine(),
+				$exception->getMessage() . '<br/><br/>' . myTrace($exception->getTrace()));
 	}
 	return null;
 }
