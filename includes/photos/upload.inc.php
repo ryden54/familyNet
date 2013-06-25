@@ -53,7 +53,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/../includes/start.inc.php';
 		<a class="btn btn-inverse" href="?action=cancel">Annuler</a>
 		<span class="btn btn-success fileinput-button">
 			<i class="icon-plus icon-white"></i>
-			<span>Envoyer d'avantage de photos...</span>
+			<span>Sélectionner d'avantage de photos...</span>
 			<input type="file" name="files[]" multiple>
 		</span>
 		<a href="?action=share" class="btn btn-primary" id="photosShareButton">Partager ces photos</a>
