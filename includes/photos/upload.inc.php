@@ -47,7 +47,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/../includes/start.inc.php';
 	</div>
 	<div class="alert alert-info" id="photosNotSharedYetAlert">
 		<h4>Partage en préparation...</h4>
-		Les photos sélectionnées ne sont visibles par personnes tant que vous n'avez pas cliquer sur le bouton "Partager" ci-dessous.
+		Les photos sélectionnées ne sont visibles par personne tant que vous n'avez pas cliquer sur le bouton "Partager" ci-dessous.
 	</div>
 	<div class="form-actions">
 		<a class="btn btn-inverse" href="?action=cancel">Annuler</a>
