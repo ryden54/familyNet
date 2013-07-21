@@ -1,6 +1,6 @@
 <?php
 // <!-- Bootstrap Image Gallery styles -->
-$context->addCssFile('http://blueimp.github.com/Bootstrap-Image-Gallery/css/bootstrap-image-gallery.min.css');
+$context->addCssFile('/static/libs/Bootstrap-Image-Gallery/css/bootstrap-image-gallery.min.css');
 
 // <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
 $context->addCssFile('/static/libs/jQuery-File-Upload/css/jquery.fileupload-ui.css');
