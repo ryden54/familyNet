@@ -16,3 +16,12 @@
 [submodule "www/static/libs/jQuery-File-Upload"]
 	path = www/static/libs/jQuery-File-Upload
 	url = https://github.com/blueimp/jQuery-File-Upload.git
+[submodule "www/static/libs/JavaScript-Templates"]
+	path = www/static/libs/JavaScript-Templates
+	url = https://github.com/blueimp/JavaScript-Templates.git
+[submodule "www/static/libs/JavaScript-Load-Image"]
+	path = www/static/libs/JavaScript-Load-Image
+	url = https://github.com/blueimp/JavaScript-Load-Image.git
+[submodule "www/static/libs/JavaScript-Canvas-to-Blob"]
+	path = www/static/libs/JavaScript-Canvas-to-Blob
+	url = https://github.com/blueimp/JavaScript-Canvas-to-Blob.git

@@ -122,15 +122,15 @@ include $_SERVER['DOCUMENT_ROOT'] . '/../includes/start.inc.php';
 //<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
 $context->addJsFile("/static/libs/jQuery-File-Upload/js/vendor/jquery.ui.widget.js");
 //<!-- The Templates plugin is included to render the upload/download listings -->
-$context->addJsFile("http://blueimp.github.com/JavaScript-Templates/tmpl.min.js");
+$context->addJsFile("/static/libs/JavaScript-Templates/js/tmpl.min.js");
 //<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
-$context->addJsFile("http://blueimp.github.com/JavaScript-Load-Image/load-image.min.js");
+$context->addJsFile("/static/libs/JavaScript-Load-Image/js/load-image.min.js");
 //<!-- The Canvas to Blob plugin is included for image resizing functionality -->
-$context->addJsFile("http://blueimp.github.com/JavaScript-Canvas-to-Blob/canvas-to-blob.min.js");
+$context->addJsFile("/static/libs/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js");
 
 //<!-- Bootstrap JS and Bootstrap Image Gallery are not required, but included for the demo -->
 // $context->addJsFile("http://blueimp.github.com/cdn/js/bootstrap.min.js");
-$context->addJsFile("http://blueimp.github.com/Bootstrap-Image-Gallery/js/bootstrap-image-gallery.min.js");
+$context->addJsFile("/static/libs/Bootstrap-Image-Gallery/js/bootstrap-image-gallery.min.js");
 
 //<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
 $context->addJsFile("/static/libs/jQuery-File-Upload/js/jquery.iframe-transport.js");
