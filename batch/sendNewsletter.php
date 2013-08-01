@@ -42,7 +42,7 @@ foreach ($targets As $t) {
 	}
 
 	//Set the subject line
-	$mail->Subject = 'L\'actualitÃ© du site'/* . ' (' . $t['Email'] . ')'*/;
+	$mail->Subject = 'L\'actualité du site'/* . ' (' . $t['Email'] . ')'*/;
 
 	$images = array();
 	$content = getNewsAfter($t['last'], $t, $images, $newsletters_id);
