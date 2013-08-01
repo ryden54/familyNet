@@ -98,7 +98,7 @@ if (sizeof($lastPhotos) > 0) {
 	foreach ($lastPhotos As $p) {
 			?>
 			<li><a
-				href="/photos/?datetype=DateUpload&annee=<?=substr($p['DateUpload'], 0, 4); ?>&mois=<?=substr($p['DateUpload'], 5, 2); ?>&jour=<?=substr(
+				href="http://<?=Config::getHost();?>/photos/?datetype=DateUpload&annee=<?=substr($p['DateUpload'], 0, 4); ?>&mois=<?=substr($p['DateUpload'], 5, 2); ?>&jour=<?=substr(
 				$p['DateUpload'],
 				8,
 				2);
