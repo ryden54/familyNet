@@ -41,6 +41,7 @@ if ($_SESSION['TOKEN'] === Html::getRequestOrPost('token', false, HTML::TEXT)) {
 		$newMembre = false;
 		if ($id === 0) {
 			$newMembre = true;
+			$membre['DateSaisie'] = Db_Sql::getNowString(true);
 			$membre = $context->getDb()->personnes()->insert($membre);
 			$id = $membre['id'];
 
