@@ -149,6 +149,10 @@ switch (Html::getRequestOrPost('action', false, HTML::TEXT))
 				$fs->unlink_file(Config::get('PORTRAITS_PATH', 'PHOTOS') . $p['id'] . '-mini.jpg');
 			}
 
+			if(isset($_SESSION['portraits'][$p['personnes_id']])===true) {
+			    unset($_SESSION['portraits'][$p['personnes_id']]);
+			}
+
 			$p->delete();
 		}
 		exit;
@@ -192,6 +196,11 @@ switch (Html::getRequestOrPost('action', false, HTML::TEXT))
 			$photo->setPortrait($id, $drawing);
 
 			$pres = $context->getDb()->photos_presences[$pres['id']];
+
+			if(isset($_SESSION['portraits'][$pres['personnes_id']])===true && strpos($_SESSION['portraits'][$pres['personnes_id']], 'portrait.') !== false) {
+			    unset($_SESSION['portraits'][$pres['personnes_id']]);
+			}
+
 			include $_SERVER['DOCUMENT_ROOT'] . '/../includes/photos/presence.inc.php';
 		}
 
