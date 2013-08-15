@@ -10,11 +10,13 @@ if ($name !== false) {
 	if (file_exists($realPath) === true) {
 		session_cache_limiter('private');
 		header("Content-Length: " . (string) (filesize($realPath)));
-		if (strpos($name, '.jpg') === false) {
+		if (strpos($name, '.jpg') !== false) {
+			header('Content-type: image/jpeg');
+		} elseif (strpos($name, '.gif') !== false) {
+			header('Content-type: image/gif');
+		} else {
 			header('Content-Disposition: attachment; filename="' . $name . '"');
 			header('Content-type: application/octet-stream');
-		} else {
-			header('Content-type: image/jpeg');
 		}
 		readfile($realPath);
 		exit();
