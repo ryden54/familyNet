@@ -54,10 +54,19 @@ if ($_SESSION['TOKEN'] === Html::getRequestOrPost('token', false, HTML::TEXT)) {
 								'IdPersonne1' => $id, 'IdPersonne2' => $linkedMembre['id']
 							));
 				} elseif ($link === 'Enfant' && $linkedMembre !== null) {
+
+				    $linkedMembreCouples = $context->getDb()->personnes_liens_couple('IdPersonne1 = '.$linked_personnes_id.' OR IdPersonne2 = '.$linked_personnes_id);
+				    if(sizeof($linkedMembreCouples)===1) {
+				        $couple = $linkedMembreCouples->fetch();
+				        $linkedMembreConjoint = $context->getDb()->personnes[($couple['IdPersonne1']!=$linked_personnes_id?$couple['IdPersonne1']:$couple['IdPersonne2'])];
+				    }
+
 					if ($membre['IdParent1'] === null && $membre['IdParent2'] != $id) {
 						$membre['IdParent1'] = $linkedMembre['id'];
+						$membre['IdParent2'] = $linkedMembreConjoint['id'];
 					} elseif ($membre['IdParent2'] === null && $membre['IdParent1'] != $id) {
 						$membre['IdParent2'] = $linkedMembre['id'];
+						$membre['IdParent1'] = $linkedMembreConjoint['id'];
 					}
 					$membre->update();
 				} elseif(in_array($link, array('IdParent1', 'IdParent2'))===true) {

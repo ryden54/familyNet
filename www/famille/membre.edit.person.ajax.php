@@ -31,11 +31,22 @@ if ($_SESSION['TOKEN'] === Html::getRequestOrPost('token', false, HTML::TEXT)) {
 				exit;
 			case 'Enfant':
 				$enfant = $context->getDb()->personnes[$linked_personnes_id];
+                $membreCouples = $context->getDb()->personnes_liens_couple('IdPersonne1 = ' . $id . ' OR IdPersonne2 = ' . $id);
+                if (sizeof($membreCouples) === 1) {
+                    $couple = $membreCouples->fetch();
+                    $membreConjoint = $context->getDb()->personnes[($couple['IdPersonne1'] != $id ? $couple['IdPersonne1'] : $couple['IdPersonne2'])];
+                }
 				if ($enfant != null) {
 					if ($enfant['IdParent1'] === null && $enfant['IdParent2'] != $id) {
 						$enfant['IdParent1'] = $id;
+                        if ($enfant['IdParent2'] === null) {
+                            $enfant['IdParent2'] = $membreConjoint['id'];
+                        }
 					} elseif ($enfant['IdParent2'] === null && $enfant['IdParent1'] != $id) {
 						$enfant['IdParent2'] = $id;
+                        if ($enfant['IdParent1'] === null) {
+                            $enfant['IdParent1'] = $membreConjoint['id'];
+                        }
 					}
 					$enfant->update();
 				}
