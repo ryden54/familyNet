@@ -32,9 +32,15 @@ function addAdress(token, personnes_id, coordonnees_id) {
 	} else {
 
 		if ($('#newCoordsZip')[0].value.length >= 4) {
-			var url = '/famille/membre.edit.adress.ajax.php?zip='
-					+ $('#newCoordsZip')[0].value + '&personnes_id='
-					+ personnes_id + '&token=' + token;
+			var url = '/famille/membre.edit.adress.ajax.php?data='
+					+ JSON.stringify({
+						zip : $('#newCoordsZip')[0].value,
+						city: $('#newCoordsCity')[0].value,
+						country: $('#newCoordsCountry')[0].value,
+						tel: $('#newCoordsTel')[0].value,
+						fax: $('#newCoordsFax')[0].value,
+						addr : $('#newCoordsAddr')[0].value
+					}) + '&personnes_id=' + personnes_id + '&token=' + token;
 
 			if (newAdressModal === null) {
 				newAdressModal = $('#newAdressModal').modal({
