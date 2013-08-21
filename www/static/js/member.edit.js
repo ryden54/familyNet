@@ -40,9 +40,7 @@ function addAdress(token, personnes_id, coordonnees_id) {
 			data.tel = $('#newCoordsTel')[0].value;
 			data.fax = $('#newCoordsFax')[0].value;
 			data.addr = $('#newCoordsAddr')[0].value;
-			url = '/famille/membre.edit.adress.ajax.php?data='
-					+ JSON.stringify(data) + '&personnes_id=' + personnes_id
-					+ '&token=' + token;
+			url = '/famille/membre.edit.adress.ajax.php';
 
 			if (newAdressModal === null) {
 				newAdressModal = $('#newAdressModal').modal({
@@ -54,7 +52,11 @@ function addAdress(token, personnes_id, coordonnees_id) {
 					.html(
 							'<div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div>');
 			newAdressModal.modal('show');
-			newAdressModal.find('.modal-body').load(url);
+			newAdressModal.find('.modal-body').load(url, {
+				'data' : data,
+				personnes_id : personnes_id,
+				token : token
+			});
 		} else {
 			$('#newCoordsZip')[0].focus();
 		}

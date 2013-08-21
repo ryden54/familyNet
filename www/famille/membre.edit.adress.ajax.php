@@ -16,7 +16,7 @@ if ($_SESSION['TOKEN'] === Html::getRequestOrPost('token', false, HTML::TEXT)) {
         'tel' => false,
         'fax' => false,
         'country' => false
-    ), json_decode(Html::getRequestOrPost('data', false, Html::ANY), true));
+    ), Html::getRequestOrPost('data', false, Html::ANY));
     if (strlen($data['zip']) >= 4) {
 
         $matchinsCoords = $context->getDb()
@@ -24,12 +24,14 @@ if ($_SESSION['TOKEN'] === Html::getRequestOrPost('token', false, HTML::TEXT)) {
             ->where('id NOT IN (SELECT coordonnees_id FROM personnes_coordonnees WHERE personnes_id = ?)', $id);
 
         if (count($matchinsCoords) <= 0 && strlen($data['zip']) >= 4 && strlen($data['city']) >= 3 && strlen($data['addr']) >= 3) {
-        	?>
-        	<div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div>
-            <script>
+            ?>
+<div class="progress progress-striped active">
+	<div class="bar" style="width: 100%;"></div>
+</div>
+<script>
             $('#newAddrForm').submit();
             </script>
-            <?php
+<?php
         } else {
 
             include $_SERVER['DOCUMENT_ROOT'] . '/../includes/start.inc.php';
