@@ -32,15 +32,17 @@ function addAdress(token, personnes_id, coordonnees_id) {
 	} else {
 
 		if ($('#newCoordsZip')[0].value.length >= 4) {
-			var url = '/famille/membre.edit.adress.ajax.php?data='
-					+ JSON.stringify({
-						zip : $('#newCoordsZip')[0].value,
-						city: $('#newCoordsCity')[0].value,
-						country: $('#newCoordsCountry')[0].value,
-						tel: $('#newCoordsTel')[0].value,
-						fax: $('#newCoordsFax')[0].value,
-						addr : $('#newCoordsAddr')[0].value
-					}) + '&personnes_id=' + personnes_id + '&token=' + token;
+			var url, data;
+			data = {};
+			data.zip = $('#newCoordsZip')[0].value;
+			data.city = $('#newCoordsCity')[0].value;
+			data.country = $('#newCoordsCountry')[0].value;
+			data.tel = $('#newCoordsTel')[0].value;
+			data.fax = $('#newCoordsFax')[0].value;
+			data.addr = $('#newCoordsAddr')[0].value;
+			url = '/famille/membre.edit.adress.ajax.php?data='
+					+ JSON.stringify(data) + '&personnes_id=' + personnes_id
+					+ '&token=' + token;
 
 			if (newAdressModal === null) {
 				newAdressModal = $('#newAdressModal').modal({
