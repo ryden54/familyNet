@@ -86,7 +86,7 @@ $photos->order($_SESSION['photos_filters']['dateType'] . " desc");
 include $_SERVER['DOCUMENT_ROOT'] . '/../includes/start.inc.php';
 ?>
 <!-- The Gallery as lightbox dialog, should be a child element of the document body -->
-<div id="blueimp-gallery" class="blueimp-gallery">
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
 	<div class="slides"></div>
 	<h3 class="title"></h3>
 	<a class="prev" title="Précédente">‹</a>
