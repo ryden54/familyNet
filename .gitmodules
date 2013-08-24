@@ -25,3 +25,6 @@
 [submodule "www/static/libs/JavaScript-Canvas-to-Blob"]
 	path = www/static/libs/JavaScript-Canvas-to-Blob
 	url = https://github.com/blueimp/JavaScript-Canvas-to-Blob.git
+[submodule "www/static/libs/gallery"]
+	path = www/static/libs/gallery
+	url = https://github.com/blueimp/Gallery.git
